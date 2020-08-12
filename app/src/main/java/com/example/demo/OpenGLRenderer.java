@@ -1,10 +1,10 @@
 package com.example.demo;
 
+import android.content.Context;
+import android.graphics.Camera;
 import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
 import android.opengl.Matrix;
-
-//import androidx.ui.graphics.vectormath.Vector3;
 
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
@@ -14,14 +14,21 @@ public class OpenGLRenderer implements GLSurfaceView.Renderer {
     private Triangle mTriangle;
     private final float[] vPMatrix = new float[16];
     private final float[] projectionMatrix = new float[16];
-    private final float[] viewMatrix = new float[16];
     private float[] rotationMatrix = new float[16];
-    private float[] scaleMatrix = new float[16];
-    private float[] positionMatrix = new float[16];
-    private float[] orientationMatrix = new float[16];
-    private float[] tempMatrix = new float[16];
+
+    private Context m_Context;
+    private PointLight m_PointLight;
+    private Camera m_Camera;
+    private int m_ViewPortWidth;
+    private int m_ViewPortHeight;
+    private Cube m_Cube;
+
 
     public volatile float Angle;
+    // assignment constructor
+    public OpenGLRenderer(Context context){
+        m_Context = context;
+    }
     @Override
     public void onSurfaceCreated(GL10 gl10, EGLConfig eglConfig) {
         // clear buffer hold colors
@@ -64,9 +71,5 @@ public class OpenGLRenderer implements GLSurfaceView.Renderer {
 
     public void SetAngle(float Angle_){
         Angle = Angle_;
-    }
-
-    public void SetPostionMatrix(Vector3 pos){
-
     }
 }
